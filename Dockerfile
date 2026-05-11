@@ -17,6 +17,7 @@ RUN cd server && npx prisma generate && npm run build
 
 # ── Production image ─────────────────────────────────────────────────────────
 FROM node:20-alpine AS production
+RUN apk add --no-cache openssl
 WORKDIR /app
 
 COPY --from=server-build /app/server/package*.json ./server/
