@@ -1,0 +1,16 @@
+{
+  "name": "team-task-manager",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run dev\"",
+    "build": "cd client && npm install && npm run build && cd ../server && npm install && npm run build",
+    "start": "cd server && npm start",
+    "db:migrate": "cd server && npm run db:migrate",
+    "db:generate": "cd server && npm run db:generate"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
