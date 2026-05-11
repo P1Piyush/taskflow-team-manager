@@ -10,6 +10,7 @@ RUN cd client && npm run build
 
 # ── Build server ──────────────────────────────────────────────────────────────
 FROM base AS server-build
+RUN apk add --no-cache openssl
 COPY server/package*.json ./server/
 RUN cd server && npm install
 COPY server/ ./server/
