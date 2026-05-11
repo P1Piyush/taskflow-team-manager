@@ -4,14 +4,14 @@ WORKDIR /app
 # ── Build client ──────────────────────────────────────────────────────────────
 FROM base AS client-build
 COPY client/package*.json ./client/
-RUN cd client && npm ci
+RUN cd client && npm install
 COPY client/ ./client/
 RUN cd client && npm run build
 
 # ── Build server ──────────────────────────────────────────────────────────────
 FROM base AS server-build
 COPY server/package*.json ./server/
-RUN cd server && npm ci
+RUN cd server && npm install
 COPY server/ ./server/
 RUN cd server && npx prisma generate && npm run build
 
@@ -20,7 +20,7 @@ FROM node:20-alpine AS production
 WORKDIR /app
 
 COPY --from=server-build /app/server/package*.json ./server/
-RUN cd server && npm ci --omit=dev
+RUN cd server && npm install --omit=dev
 
 COPY --from=server-build /app/server/dist ./server/dist
 COPY --from=server-build /app/server/prisma ./server/prisma
