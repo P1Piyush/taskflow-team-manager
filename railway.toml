@@ -3,7 +3,7 @@ dockerfilePath = "Dockerfile"
 
 [deploy]
 startCommand = "sh -c 'cd /app/server && npx prisma migrate deploy && node dist/index.js'"
-healthcheckPath = "/api/auth/me"
+healthcheckPath = "/health"
 healthcheckTimeout = 30
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
