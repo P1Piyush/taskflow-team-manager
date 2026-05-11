@@ -44,6 +44,9 @@ const app = express();
 app.use(cors({ origin: process.env.CLIENT_ORIGIN || "*" }));
 app.use(express.json());
 
+// ── Health check ──────────────────────────────────────────────────────────────
+app.get("/health", (_req, res) => res.json({ status: "ok" }));
+
 // ── Auth routes ───────────────────────────────────────────────────────────────
 app.post("/api/auth/signup", async (req: Request, res: Response) => {
   const p = signupSchema.safeParse(req.body);
